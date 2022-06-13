@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Admin Dashboard Template">
+    <meta name="keywords" content="admin,dashboard">
+    <meta name="author" content="skcats">
+
+    <title>物料管理系统-{% block title %} {% endblock %}</title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/icomoon/style.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/uniform/css/default.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/nvd3/nv.d3.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static',filename='plugins/datatables/css/jquery.datatables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url_for('static',filename='plugins/datatables/css/jquery.datatables_themeroller.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url_for('static',filename='plugins/bootstrap-datepicker/css/datepicker3.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Theme Styles -->
+    <link href="{{url_for('static',filename='css/ecaps.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='css/custom.css')}}" rel="stylesheet"> {% endblock %}
+
+
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="page-sidebar">
+            <a class="logo-box" href="base">
+                <span>物料管理系统</span>
+                <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
+                <i class="icon-close" id="sidebar-toggle-button-close"></i>
+            </a>
+            <div class="page-sidebar-inner">
+                <div class="page-sidebar-menu">
+                    <ul class="accordion-menu">
+                        <li class="menu-divider"></li>
+                        <li id="staff">
+                            <a href="staff">
+                                <i class="fa fa-address-card"></i><span> 员工信息管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="branch">
+                            <a href="branch">
+                                <i class="fa fa-group"></i><span> 部门信息管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="classify">
+                            <a href="classify">
+                                <i class="fa fa-list"></i><span> 物料分类管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="inventory">
+                            <a href="inventory">
+                                <i class="fa fa-th"></i><span> 物料库存管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="InDepot">
+                            <a href="InDepot">
+                                <i class="fa fa-mail-forward"></i><span> 物料入库管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="OutDepot">
+                            <a href="OutDepot">
+                                <i class="fa fa-mail-reply"></i><span> 物料领用管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="transport">
+                            <a href="transport">
+                                <i class="fa fa-truck"></i><span> 物料转仓管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class='page-header'>
+                <nav class="navbar navbar-default">
+                    <div class="'container-fluid">
+                        <div class="navbar-header">
+                            <div class="logo-sm">
+                                <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+                                <a class="logo-box" href="index.html"><span>物料管理系统</span></a>
+                            </div>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                        </div>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+                            <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li class="dropdown user-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 25px; vertical-align:top"> {{ name }}</i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">账号设置</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">登出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            {% block inner %} {% endblock %}
+        </div>
+    </div>
+
+    <!-- Javascripts -->
+    <script src="{{url_for('static',filename='plugins/jquery/jquery-3.1.0.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/bootstrap/js/bootstrap.min.js' )}}"></script>
+    <script src="{{url_for('static',filename='plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/uniform/js/jquery.uniform.standalone.js' )}} "></script>
+    <script src="{{url_for('static',filename='plugins/switchery/switchery.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/d3/d3.min.js' )}} "></script>
+    <script src="{{url_for('static',filename='plugins/nvd3/nv.d3.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/flot/jquery.flot.min.js' )}} "></script>
+    <script src="{{url_for('static',filename='plugins/flot/jquery.flot.time.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/flot/jquery.flot.symbol.min.js' )}}"></script>
+    <script src="{{url_for('static',filename='plugins/flot/jquery.flot.resize.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/flot/jquery.flot.tooltip.min.js' )}}"></script>
+    <script src="{{url_for('static',filename='plugins/flot/jquery.flot.pie.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/chartjs/chart.min.js' )}} "></script>
+    <script src="{{url_for('static',filename='js/ecaps.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='js/pages/dashboard.js' )}} "></script>
+    <script src="{{url_for( 'static',filename='plugins/datatables/js/jquery.datatables.min.js')}}"></script>
+    <script src="{{url_for( 'static',filename='plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{url_for( 'static',filename='js/pages/table-data.js')}}"></script>
+</body>
+
+</html>
