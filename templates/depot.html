@@ -1,7 +1,7 @@
-{%extends 'base.html' %} {% block title %} 部门信息管理 {% endblock %} {% block head %} {{ super() }} {% endblock %} {% block inner %}
+{%extends 'base.html' %} {% block title %} 仓库信息管理 {% endblock %} {% block head %} {{ super() }} {% endblock %} {% block inner %}
 <div class="page-inner">
     <div class="page-title">
-        <h3 class="breadcrumb-header">部门信息管理</h3>
+        <h3 class="breadcrumb-header">仓库信息管理</h3>
     </div>
     <div id="main-wrapper">
         <div class="row">
@@ -112,7 +112,7 @@
 
             $.ajax({
                 type: "post",
-                url: '/branch/edit',
+                url: '/depot/edit',
                 data: JSON.stringify(data),
                 dataType: "json",
                 success: function(msg) {
@@ -140,7 +140,7 @@
 
         $.ajax({
             type: "post",
-            url: '/branch/insert',
+            url: '/depot/insert',
             data: JSON.stringify(data),
             dataType: "json",
             success: function(msg) {

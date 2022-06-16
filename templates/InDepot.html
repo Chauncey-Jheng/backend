@@ -8,6 +8,33 @@
             <div class="col-md-12">
                 <div class="panel panel-white">
                     <div class="panel-body">
+                        <button type="add" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#myModal">新增记录</button>
+                        <!-- Modal -->
+                        <form id="add-row-form" action="javascript:void(0);">
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">部门信息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% for i in labels %}
+                                            <div class="form-group">
+                                                {% if loop.index0 not in uninsertableLabelsIndex %} {% if '数量' in i %}
+                                                <input type="number" id="{{i}}-input" class="form-control" placeholder="{{i}}" required> {% else %}
+                                                <input type="text" id="{{i}}-input" class="form-control" placeholder="{{i}}" required> {% endif %} {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            <button type="submit_2" id="add-row" class="btn btn-success">加入</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                 <thead>
@@ -32,8 +59,78 @@
                 </div>
             </div>
         </div>
-        <!-- Row -->
     </div>
 </div>
+<!-- Row -->
 
+{% endblock %} {% block scripts %} {{super()}}
+<script type="text/javascript">
+    $('#add-row').on('click', function() {
+        var data = {};
+        var inputs = $(".form-control");
+        for (var i = 0; i < inputs.length; i += 1) {
+            var inputV = $(inputs[i]).val()
+            data[i] = inputV;
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/InDepot/insert',
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function(msg) {
+                console.log(msg);
+                if (msg['msg'] == 'success') {
+                    alert("插入成功!");
+                    location.reload(true);
+                } else {
+                    alert("插入失败！请检查输入数据是否有误! ");
+                }
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $("#c-submit-all").on('click', function() {
+        var dates = {};
+        var inputs = $(".compute-time-all");
+        for (var i = 0; i < inputs.length; i += 1) {
+            var inputV = $(inputs[i]).val()
+            dates[i] = inputV;
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/compute-all',
+            data: JSON.stringify(dates),
+            dataType: "json",
+            success: function(msg) {
+                console.log(msg);
+                var arr = msg['ret'];
+                console.log(arr);
+                if (msg['msg'] == 'success') {
+                    var arr = msg['ret'];
+                    console.log(arr);
+                    var table = "";
+                    for (var i = 0; i < arr.length; i += 1) {
+                        table += "<tr>";
+                        for (var j = 0; j < arr[i].length; j += 1) {
+                            table += "<td>" + String(arr[i][j]) + "</td>"
+                        }
+                        table += "</tr>"
+                    }
+                    console.log(table);
+                    var tbody = document.getElementById("compute-result");
+                    console.log(tbody);
+                    alert("查询成功! ");
+                } else {
+                    alert("查询失败! 请检查输入条件是否有误! ")
+                }
+            }
+        })
+
+        alert("查看结果! ");
+    })
+</script>
 {% endblock %}

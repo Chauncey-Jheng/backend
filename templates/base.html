@@ -13,7 +13,7 @@
 
     <title>物料管理系统-{% block title %} {% endblock %}</title>
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css"> -->
     <link href="{{url_for('static',filename='plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url_for('static',filename='plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url_for('static',filename='plugins/icomoon/style.css')}}" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
 <body>
     <div class="page-container">
         <div class="page-sidebar">
-            <a class="logo-box" href="base">
+            <a class="logo-box" href="staff">
                 <span>物料管理系统</span>
                 <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
                 <i class="icon-close" id="sidebar-toggle-button-close"></i>
@@ -51,6 +51,12 @@
                         <li id="branch">
                             <a href="branch">
                                 <i class="fa fa-group"></i><span> 部门信息管理</span>
+                            </a>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li id="depot">
+                            <a href="depot">
+                                <i class="fa fa-database"></i><span> 仓库信息管理</span>
                             </a>
                         </li>
                         <li class="menu-divider"></li>
@@ -77,6 +83,7 @@
                                 <i class="fa fa-mail-reply"></i><span> 物料领用管理</span>
                             </a>
                         </li>
+
                         <li class="menu-divider"></li>
                         <li id="transport">
                             <a href="transport">
@@ -129,6 +136,7 @@
     </div>
 
     <!-- Javascripts -->
+    {% block scripts %}
     <script src="{{url_for('static',filename='plugins/jquery/jquery-3.1.0.min.js')}}"></script>
     <script src="{{url_for( 'static',filename='plugins/bootstrap/js/bootstrap.min.js' )}}"></script>
     <script src="{{url_for('static',filename='plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -148,6 +156,10 @@
     <script src="{{url_for( 'static',filename='plugins/datatables/js/jquery.datatables.min.js')}}"></script>
     <script src="{{url_for( 'static',filename='plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{url_for( 'static',filename='js/pages/table-data.js')}}"></script>
+    {% endblock %}
+
+
+
 </body>
 
 </html>

@@ -1,0 +1,69 @@
+{%extends 'base.html' %} {% block title %} 物料入库管理 {% endblock %} {% block head %} {{ super() }} {% endblock %} {% block inner %}
+<div class="page-inner">
+    <div class="page-title">
+        <h3 class="breadcrumb-header">物料入库管理</h3>
+    </div>
+    <div id="main-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <form id="compute">
+                        <h4>统计指定时间段内各种物料的入库数量(所有仓库)</h4>
+                        <div class="form-group">
+                            <input type="text" id="input_1" class="compute-time-all" placeholder="开始时间" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="input_2" class="compute-time-all" placeholder="结束时间" required>
+                        </div>
+                        <button type="compute_submit" id="c-submit-all" class="btn btn-success">统计</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="example_2" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+                    <tr>
+                        <th>物料号</th>
+                        <th>物料名</th>
+                        <th>入库数量</th>
+                        <th>领用数量</th>
+                    </tr>
+                </thead>
+                <tbody id="compute-result">
+                    {% for i in content %}
+                    <tr>
+                        {% for j in i %}
+                        <td>{{j}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block scripts %} {{super()}}
+
+<script type="text/javascript">
+    $("#c-submit-all").on('click', function() {
+        var dates = {};
+        var inputs = $(".compute-time-all");
+        for (var i = 0; i < inputs.length; i += 1) {
+            var inputV = $(inputs[i]).val()
+            dates[i] = inputV;
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/compute-all',
+            data: JSON.stringify(dates),
+            dataType: "json",
+            success: function(msg) {
+                window.location.replace("/compute");
+            }
+        })
+    })
+</script>
+{% endblock %}
